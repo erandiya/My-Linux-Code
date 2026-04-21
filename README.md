@@ -149,6 +149,129 @@ pm2 flush && pm2 restart all && pm2 status
 
 ---
 
+# 🛠️ VPS Management & Maintenance Guide (පාලන සහ නඩත්තු අත්පොත)
+
+මෙම ලේඛනය මගින් පද්ධතියේ සේවාවන් පාලනය කරන ආකාරය සහ VPS එකේ නඩත්තු කටයුතු සිදුකරන ආකාරය පැහැදිලි කරයි.
+
+---
+
+## 🚀 1. PM2 Process Manager (සේවාවන් පාලනය)
+
+PM2 භාවිතා කරන්නේ WhatsApp API එක පසුබිමින් දිගටම ක්‍රියාත්මක කර තැබීමටයි.
+
+### ✅ ආරම්භ කිරීම (Starting)
+*   **අලුතින් සේවාවක් ආරම්භ කිරීමට:**
+    ```bash
+    pm2 start index.js --name "whatsapp-api"
+    ```
+*   **සර්වර් එකේ උපරිම හැකියාව භාවිතා කරමින් රන් කිරීමට:**
+    ```bash
+    pm2 start index.js -i max
+    ```
+
+### 📊 පරීක්ෂා කිරීම (Monitoring)
+*   **දැනට රන් වන සේවාවන් ලැයිස්තුව බැලීමට:**
+    ```bash
+    pm2 status
+    ```
+*   **සජීවී ලොග් (Live Logs) පරීක්ෂා කිරීමට:**
+    ```bash
+    pm2 logs whatsapp-api
+    ```
+*   **CPU සහ RAM භාවිතය Dashboard එකක් ලෙස බැලීමට:**
+    ```bash
+    pm2 monit
+    ```
+
+### 🔄 පාලනය (Control)
+*   **සේවාවන් නැවැත්වීමට (Stop):**
+    ```bash
+    pm2 stop all
+    ```
+*   **සේවාවන් නැවත පණ ගැන්වීමට (Restart):**
+    ```bash
+    pm2 restart all
+    ```
+*   **සේවාවන් ලැයිස්තුවෙන් ඉවත් කිරීමට:**
+    ```bash
+    pm2 delete all
+    ```
+
+### 💾 සර්වර් එක Reboot වූ විට (Persistence)
+*   **දැනට රන් වන ලිස්ට් එක සේව් කිරීමට:**
+    ```bash
+    pm2 save
+    ```
+*   **සර්වර් එක Restart වූ විගස PM2 ආරම්භ වීමට:**
+    ```bash
+    pm2 startup
+    ```
+    *(මෙය ගැසූ පසු ලැබෙන පේළිය කොපි කර රන් කරන්න)*
+
+---
+
+## 🧹 2. System Maintenance & Disk Cleanup (නඩත්තුව)
+
+ඩිස්ක් එක පිරීම වැළැක්වීමට සහ හිරවීම් ඉවත් කිරීමට මෙම විධානයන් භාවිතා කරන්න.
+
+### 📂 අවසර සහ ඉඩ (Permissions & Disk)
+*   **ෆෝල්ඩරයට පූර්ණ අවසර ලබා දීම:**
+    ```bash
+    chmod -R 777 ~/WaNTg
+    ```
+*   **ඉතිරිව ඇති ඉඩ පරීක්ෂා කිරීම:**
+    ```bash
+    df -h
+    ```
+
+### 🧽 ඉඩ නිදහස් කිරීම (Cleanup)
+*   **බාගත වූ මීඩියා මකා දැමීම:**
+    ```bash
+    rm -rf ~/WaNTg/downloads/*
+    ```
+*   **ලොග් ෆයිල් හිස් කිරීම (Reset Logs):**
+    ```bash
+    pm2 flush
+    truncate -s 0 ~/WaNTg/*.log
+    ```
+*   **Ubuntu අනවශ්‍ය ෆයිල් පිරිසිදු කිරීම:**
+    ```bash
+    sudo apt clean && sudo apt autoremove -y
+    ```
+
+### 🛑 හිරවුණු දේවල් නැවැත්වීම (Force Kill)
+*   **බ්‍රවුසරය සහ PHP හිරවී ඇත්නම්:**
+    ```bash
+    pkill -9 -f chrome
+    pkill -9 -f chromium
+    pkill -9 -f php
+    rm -f ~/WaNTg/*.lock
+    ```
+
+### 📏 ඩිස්ක් එක වැඩි කිරීම (Resize Partition)
+සර්වර් එකේ ඉඩ වැඩි කළ පසු (8GB -> 20GB) එය පද්ධතියට එක් කිරීමට:
+```bash
+sudo growpart /dev/sda 1
+sudo resize2fs /dev/sda1
+```
+---
+### ⏰ 3. Cron Job Control (ස්වයංක්‍රීයකරණය)
+*   **Cron Jobs සංස්කරණය කිරීමට:**
+```Bash
+crontab -e
+```
+
+*   **Cron සේවාව Restart කිරීමට:**
+```Bash
+sudo systemctl restart cron
+```
+
+### 💡 The Emergency Combo (හදිසි අවස්ථාවකදී)
+පද්ධතිය සම්පූර්ණයෙන් පිරිසිදු කර නැවත පණ ගැන්වීමට මෙය එකවර රන් කරන්න:
+```Bash
+pm2 flush && rm -f ~/WaNTg/*.lock && pm2 restart all && pm2 status
+```
+
 ### 👨‍💻 Author
 Developed by **[Erandiya Sumanaweera.](https://fb.com/erandiya)**
 
