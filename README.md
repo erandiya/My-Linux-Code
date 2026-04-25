@@ -33,6 +33,17 @@ git commit -m "Final cleanup and merged system"
 git branch -M main
 git remote add origin https://github.com/erandiya/Telegram-WhatsApp-Forwarder.git
 
+# ගිට් ෙටා්කන් Cache temporarily (restart/logout වෙනකම් හෝ timeout එකකට)
+git config --global credential.helper cache
+
+# Custom timeout (e.g. 1 hour = 3600 sec):
+git config --global credential.helper 'cache --timeout=3600'
+
+# Save permanently in plaintext file (~/.git-credentials)
+git config --global credential.helper store
+cat ~/.git-credentials
+# https://USERNAME:TOKEN@github.com         //Example format
+
 # නෝර්මල් Push කරන්න
 git push origin main 
 
