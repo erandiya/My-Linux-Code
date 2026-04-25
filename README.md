@@ -279,6 +279,29 @@ sudo swapon /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
+### ⏰ 5. .conf files rename කර .dlx extension එකට වෙනස් කරන්න ඕනේ නම්
+*   ඔබේ VPS එකේ RAM එක පිරුණු සැණින් පද්ධතිය Crash වීම වැළැක්වීමට අපි ඩිස්ක් එකෙන් 2GB ප්‍රමාණයක් "අතථ්‍ය මතකය" (Virtual Memory) ලෙස වෙන් කරමු. මෙය පද්ධතියේ ස්ථායීතාවය (Stability) 100% කින් වැඩි කරයි.
+
+```Bash
+for f in *.conf; do
+    cp "$f" "${f%.conf}.dlx"
+done
+```
+
+*   Move (rename) කරන්න ඕනේ නම් copy නොවෙයි.
+
+```Bash
+for f in *.conf; do
+    mv "$f" "${f%.conf}.dlx"
+done
+```
+
+```Bash
+for f in *.dlx; do
+    mv "$f" "${f%.dlx}.conf"
+done
+```
+
 ### 💡 The Emergency Combo (හදිසි අවස්ථාවකදී)
 පද්ධතිය සම්පූර්ණයෙන් පිරිසිදු කර නැවත පණ ගැන්වීමට මෙය එකවර රන් කරන්න:
 ```Bash
