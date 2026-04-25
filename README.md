@@ -269,11 +269,7 @@ sudo systemctl restart cron
 ---
 ### ⏰ 4. සර්වර් එකට "Swap Space" එකතු කිරීම
 *   ඔබේ VPS එකේ RAM එක පිරුණු සැණින් පද්ධතිය Crash වීම වැළැක්වීමට අපි ඩිස්ක් එකෙන් 2GB ප්‍රමාණයක් "අතථ්‍ය මතකය" (Virtual Memory) ලෙස වෙන් කරමු. මෙය පද්ධතියේ ස්ථායීතාවය (Stability) 100% කින් වැඩි කරයි.
-```Bash
-crontab -e
-```
 
-*   **Cron සේවාව Restart කිරීමට:**
 ```Bash
 sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
