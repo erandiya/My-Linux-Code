@@ -61,7 +61,7 @@ git rm README.md.save* index.js.bak sync.php.bak
 
 # 🛠️ PM2 Command Cheat Sheet (වැදගත්ම විධානයන්)
 
-ඔබේ VPS එකේ කටයුතු පහසු කර ගැනීම සඳහා **PM2 (Process Manager 2)** හි භාවිතා වන වැදගත්ම කමාන්ඩ් (Commands) ටික මෙන්න. මෙය ඔබට ඕනෑම වෙලාවක බලා ගැනීමට "Cheat Sheet" එකක් ලෙස පාවිච්චි කළ හැක.
+ඔබේ VPS එකේ කටයුතු පහසු කර ගැනීම සඳහා ** PM2 (Process Manager 2)** හි භාවිතා වන වැදගත්ම කමාන්ඩ් (Commands) ටික මෙන්න. මෙය ඔබට ඕනෑම වෙලාවක බලා ගැනීමට "Cheat Sheet" එකක් ලෙස පාවිච්චි කළ හැක.
 
 ---
 
