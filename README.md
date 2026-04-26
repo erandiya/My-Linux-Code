@@ -17,8 +17,8 @@ rm -rf .git
 git init
 
 # ඔබේ විස්තර ලබා දෙන්න
-git config user.email "gayan@gmail.com"
-git config user.name "gayan"
+git config user.email "sumanaweera50659@gmail.com"
+git config user.name "erandiya"
 
 # රහස්‍ය දත්ත සහ විශාල ෆයිල් ඉවත් කිරීමට .gitignore තහවුරු කරගන්න
 nano .gitignore
