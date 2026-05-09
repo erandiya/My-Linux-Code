@@ -320,8 +320,35 @@ pm2 flush && rm -f ~/WaNTg/*.lock && pm2 restart all && pm2 status
 ```
 
 ### Google Cloud - Ubunthu
+VM list එකේ SSH button එකට අසල තියෙන ▼ click කරන්න.
+ඊට පස්සේ:
+View gcloud command
 ```Bash
+sudo su
+sudo passwd root
+```
 
+SSH Password Login enable කරන්න
+මේ file එක open කරන්න:
+```Bash
+sudo nano /etc/ssh/sshd_config
+```
+ඇතුලේ මේ lines හොයන්න:
+
+PasswordAuthentication no
+PermitRootLogin prohibit-password
+
+ඒවා මෙහෙම වෙනස් කරන්න:
+
+PasswordAuthentication yes
+PermitRootLogin yes
+
+# තියෙනවා නම් remove කරන්න.
+
+```bash
+sudo ufw allow 22/tcp
+sudo ufw reload
+sudo systemctl restart ssh
 ```
 
 ### 👨‍💻 Author
