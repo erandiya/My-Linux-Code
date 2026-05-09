@@ -319,6 +319,11 @@ done
 pm2 flush && rm -f ~/WaNTg/*.lock && pm2 restart all && pm2 status
 ```
 
+### Google Cloud - Ubunthu
+```Bash
+
+```
+
 ### 👨‍💻 Author
 Developed by **[Erandiya Sumanaweera.](https://fb.com/erandiya)**
 
