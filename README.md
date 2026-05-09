@@ -319,36 +319,28 @@ done
 pm2 flush && rm -f ~/WaNTg/*.lock && pm2 restart all && pm2 status
 ```
 
-### Google Cloud - Ubunthu
-VM list එකේ SSH button එකට අසල තියෙන ▼ click කරන්න.
-ඊට පස්සේ:
-View gcloud command
+### Google Cloud - Ubuntu get root access
+Add Startup script
 ```Bash
-sudo su
-sudo passwd root
-```
+#!/bin/bash
 
-SSH Password Login enable කරන්න
-මේ file එක open කරන්න:
-```Bash
-sudo nano /etc/ssh/sshd_config
-```
-ඇතුලේ මේ lines හොයන්න:
+apt update -y
 
-PasswordAuthentication no
-PermitRootLogin prohibit-password
+useradd -m -s /bin/bash erandiya
+echo 'erandiya:password' | chpasswd
+usermod -aG sudo erandiya
 
-ඒවා මෙහෙම වෙනස් කරන්න:
+echo 'root:password' | chpasswd
 
+cat >/etc/ssh/sshd_config.d/custom.conf <<EOF
 PasswordAuthentication yes
 PermitRootLogin yes
+PubkeyAuthentication yes
+KbdInteractiveAuthentication yes
+UsePAM yes
+EOF
 
-# තියෙනවා නම් remove කරන්න.
-
-```bash
-sudo ufw allow 22/tcp
-sudo ufw reload
-sudo systemctl restart ssh
+systemctl restart ssh || systemctl restart sshd
 ```
 
 ### 👨‍💻 Author
