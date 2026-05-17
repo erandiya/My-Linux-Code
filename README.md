@@ -343,6 +343,55 @@ EOF
 systemctl restart ssh || systemctl restart sshd
 ```
 
+### Web Server එක Configure කිරීම (Apache හෝ Nginx)
+Domain එක point කළාට පස්සේ, සර්වර් එකට කියන්න ඕනේ මේ domain එකෙන් එන request භාරගන්න කියලා.
+
+*    Apache පාවිච්චි කරනවා නම්:
+SSH හරහා VM එකට ඇතුළු වෙන්න.
+Configuration file එක open කරන්න:
+```Bash
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+එහි ServerName සහ ServerAlias එකතු කරන්න:
+```Bash
+ServerName yourdomain.com
+ServerAlias www.yourdomain.com
+DocumentRoot /var/www/html
+```
+
+*    ඔයා Nginx පාවිච්චි කරනවා නම්:
+```Bash
+sudo nano /etc/nginx/sites-available/default
+```
+server_name එකට ඔයාගේ domain එක දෙන්න:
+```Bash
+server_name yourdomain.com www.yourdomain.com;
+```
+
+සර්වර් එක restart කරන්න: 
+```Bash
+sudo systemctl restart apache2
+```
+
+### SSL (HTTPS) ලබාගැනීම (වැදගත්!)
+දැන් සයිට් එක වැඩ කළත් "Not Secure" කියලා පෙන්වයි. ඒක හදාගන්න Certbot පාවිච්චි කරලා නොමිලේ SSL දාගන්න පුළුවන්.
+VM එකේ මේ command එක ගහන්න:
+*     (Apache සඳහා)
+```Bash
+sudo apt install certbot python3-certbot-apache
+# SSL active කරන්න:
+sudo certbot --apache
+```
+
+*    (Nginx සඳහා)
+```Bash
+sudo apt install certbot python3-certbot-nginx
+# SSL active කරන්න:
+sudo certbot --nginx
+```
+
+සැලකිය යුතුයි: DNS update වෙන්න විනාඩි 10 සිට පැය කිහිපයක් දක්වා කාලයක් ගතවිය හැක.
+
 ### 👨‍💻 Author
 Developed by **[Erandiya Sumanaweera.](https://fb.com/erandiya)**
 
